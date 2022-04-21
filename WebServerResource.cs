@@ -74,7 +74,20 @@ public class WebServerResource : HelloResourceBase
                     Protocol = SecurityRuleProtocol.Tcp,
                     SourceAddressPrefix = "*",
                     SourcePortRange = "*"
-                }
+                },
+                new Pulumi.AzureNative.Network.Inputs.SecurityRuleArgs
+                {
+                    Access = SecurityRuleAccess.Allow,
+                    Description = "Allow is SSH",
+                    DestinationAddressPrefix = "*",
+                    DestinationPortRange = "22",
+                    Direction = SecurityRuleDirection.Inbound,
+                    Name = "allow_ssh_in",
+                    Priority = 100,
+                    Protocol = SecurityRuleProtocol.Tcp,
+                    SourceAddressPrefix = "10.0.0.0/16",
+                    SourcePortRange = "*"
+                },
             },
             Tags = GlobalTags
         });
